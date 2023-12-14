@@ -43,7 +43,7 @@ const closureCompiler = new ClosureCompiler({
     engineDir + "/CCBoot.js",
     ...jsList
   ],
-  js_output_file: 'output/cocos2d-3.17.js',
+  js_output_file: 'lib/cocos2d-3.17.js',
   compilation_level: 'WHITESPACE_ONLY',
   debug: true
 });

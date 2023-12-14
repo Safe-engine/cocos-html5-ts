@@ -1,15 +1,10 @@
 {
   "name": "cocos-html5-ts",
-  "version": "1.0.0",
+  "version": "1.0.4",
   "description": "",
-  "main": "index.js",
-  "scripts": {
-    "start": "node index.js"
-  },
+  "main": "./lib/index.js",
+  "types": "./@types/index.d.ts",
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "google-closure-compiler": "^20230802.0.0"
-  }
+  "license": "ISC"
 }

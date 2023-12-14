@@ -222,4 +222,5 @@ package-lock.json
 output/
 dist/
 build/
+lib/
 .parcel-cache
