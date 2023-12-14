@@ -16,6 +16,7 @@
 /// <reference path="extensions/ccpool/pool.d.ts" />
 /// <reference path="extensions/cocosstudio/load.d.ts" />
 /// <reference path="extensions/gui/scrollview.d.ts" />
+/// <reference path="extensions/ccui/index.d.ts" />
 
 /// <reference path="tilemap/layer.d.ts" />
 /// <reference path="tilemap/object-group.d.ts" />
