@@ -403,7 +403,7 @@ declare namespace cc {
      * @param {function|Object} [loadCallback]
      * @return {cc.AsyncPool}
      */
-    export function load(resources: string, option: any, loadCallback: any): AsyncPool
+    export function load(resources: string | string[], option: any, loadCallback: any): AsyncPool
 
     /**
      * <p>
