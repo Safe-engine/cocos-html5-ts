@@ -5,9 +5,8 @@ const path = require('path')
 // console.log(ClosureCompiler.CONTRIB_PATH); // absolute path to the contrib folder which contain externs
 const modules = [
   "cocos2d",
-  "chipmunk",
-  "extensions",
-  "cocostudio"
+  "gui",
+  "ccui",
 ]
 const engineDir = 'cocos2d-html5'
 const _jsAddedCache = {}
