@@ -75,3 +75,4 @@ cocos2d-html5
 .gitmodules
 index.js
 node_modules/.bin/
+cached-package.json

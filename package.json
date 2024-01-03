@@ -1,10 +1,12 @@
 {
   "name": "cocos-html5-ts",
-  "version": "1.0.8",
-  "description": "",
-  "main": "index.js",
+  "version": "1.0.9",
+  "description": "cocos html5 lib for safex engine",
+  "main": "lib/cocos2d-3.17.js",
   "scripts": {
-    "start": "node index.js"
+    "prepublishOnly": "node ./scripts/cleanse-pkg.js",
+    "postpublish": "node ./scripts/restore-pkg.js",
+    "start": "node ./index.js"
   },
   "keywords": [],
   "author": "",

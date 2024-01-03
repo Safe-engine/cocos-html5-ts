@@ -3,8 +3,8 @@ const fs = require('fs');
 const path = require('path');
 
 // Define absolute paths for original pkg and temporary pkg.
-const ORIG_PKG_PATH = path.resolve(__dirname, '../package.json');
-const CACHED_PKG_PATH = path.resolve(__dirname, '../../cached-package.json');
+const ORIG_PKG_PATH = path.join(__dirname, '../package.json');
+const CACHED_PKG_PATH = path.join(__dirname, '../cached-package.json');
 
 // Obtain original `package.json` contents.
 const pkgData = require(ORIG_PKG_PATH);
@@ -15,7 +15,7 @@ fs.writeFile(CACHED_PKG_PATH, JSON.stringify(pkgData), function (err) {
 });
 
 // Remove the specified named scripts from the scripts section.
-delete pkgData.scripts;
+// delete pkgData.scripts;
 delete pkgData.devDependencies;
 delete pkgData.dependencies;
 
