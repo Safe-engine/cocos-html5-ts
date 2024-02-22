@@ -121,6 +121,19 @@ declare namespace ccui {
     string: string;
   }
 
+  export class RichElement extends Node {
+  }
+  export class RichElementText extends RichElement {
+    static create(tag: number, color: Color4B, opacity: number, text: string, fontName: string, fontSize: number): RichElementText
+  }
+  export class RichText extends Widget {
+    constructor(textContent: string, fontName: string, fontSize: number);
+    pushBackElement(val: RichElement): void;
+    formatText(): void;
+    _formatTextDirty: boolean;
+    _richElements: RichElement[];
+  }
+
   export class ImageView extends Widget {
     constructor(imageFileName: string, texType?: TextureType);
     string: string;
