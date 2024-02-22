@@ -7,9 +7,11 @@
 - `git submodule add https://github.com/cocos-frameworks/cocos2d-html5.git frameworks/cocos2d-html5`
 - `git submodule update --init`
 
-- fix: `"typeRoots": [
+- fix: 
+```
+"typeRoots": [
   "./node_modules/cocos-html5-ts/@types",
   "./node_modules/@types",
   "./@types",
 ],
-`
+```

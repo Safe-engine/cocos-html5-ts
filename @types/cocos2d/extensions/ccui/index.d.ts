@@ -119,6 +119,9 @@ declare namespace ccui {
     setFontName(font: string): void;
     setTextVerticalAlignment(align: number): void;
     string: string;
+
+    enableOutline(color: Color4B, width: number)
+    enableShadow(color: Color4B, offset: Size, blur: number)
   }
 
   export class RichElement extends Node {

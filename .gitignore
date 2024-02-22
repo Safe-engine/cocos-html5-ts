@@ -224,3 +224,4 @@ dist/
 build/
 lib/
 .parcel-cache
+cached-package.json
