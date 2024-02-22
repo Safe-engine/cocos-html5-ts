@@ -130,7 +130,7 @@ declare namespace ccui {
     static create(tag: number, color: Color4B, opacity: number, text: string, fontName: string, fontSize: number): RichElementText
   }
   export class RichText extends Widget {
-    constructor(textContent: string, fontName: string, fontSize: number);
+    constructor();
     pushBackElement(val: RichElement): void;
     formatText(): void;
     _formatTextDirty: boolean;
