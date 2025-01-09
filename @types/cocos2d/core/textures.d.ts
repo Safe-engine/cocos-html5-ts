@@ -601,6 +601,7 @@ declare namespace cc {
     //});
 
     export class Texture2D extends Class {
+        public url: string;
         public isLoaded(): boolean;
         public getPixelsWide(): number;
         public getPixelsHigh(): number;
