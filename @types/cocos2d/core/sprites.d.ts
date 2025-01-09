@@ -1033,7 +1033,7 @@ declare namespace cc {
    * var frame2 = new cc.SpriteFrame(texture, cc.rect(0,0,90,128),false,0,cc.size(90,128));
    */
   export class SpriteFrame {
-    public constructor(filename: string | Texture2D, rect: Rect, rotated: boolean, offset: Point, originalSize: Size);
+    public constructor(filename: string | Texture2D, rect: Rect, rotated?: boolean, offset?: Point, originalSize?: Size);
 
     /**
      * Returns whether the texture have been loaded
@@ -1205,7 +1205,7 @@ declare namespace cc {
      * cc.spriteFrameCache.addSpriteFrames(s_grossiniPlist);
      * cc.spriteFrameCache.addSpriteFrames(s_grossiniJson);
      */
-    export function addSpriteFrames(url: string, texture: HTMLImageElement | Texture2D | string): void;
+    export function addSpriteFrames(url: string, texture?: HTMLImageElement | Texture2D | string): void;
 
     /**
      *
