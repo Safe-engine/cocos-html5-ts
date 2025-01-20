@@ -1165,7 +1165,14 @@ declare namespace cc {
     /**
      * Run game.
      */
-    export function run(id?: number): void
+    interface RunOptions {
+      debugMode: 1 | 0
+      showFPS: boolean
+      frameRate: number
+      id: string
+      renderMode: 0 | 1 | 2
+    }
+    export function run(option: RunOptions, onStart: () => void): void
 
     /**
      * End game, it will close the game window.
