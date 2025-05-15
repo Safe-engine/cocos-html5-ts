@@ -605,6 +605,8 @@ declare namespace cc {
         public isLoaded(): boolean;
         public getPixelsWide(): number;
         public getPixelsHigh(): number;
+        public initWithElement(image: Image): void;
+        public handleLoadedTexture(): void;
     }
 
     ////////////////////////////////////////////////////////////////////////////////
