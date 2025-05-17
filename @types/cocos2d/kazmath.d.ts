@@ -1,4 +1,4 @@
-/// <reference path="cocos2d-lib.d.ts" />
+/// <reference path="./index.d.ts" />
 
 declare namespace cc.math {
 // +--------------------------------------------------------------------------------

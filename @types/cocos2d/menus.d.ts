@@ -1,5 +1,4 @@
-/// <reference path="cocos2d-lib.d.ts" />
-
+/// <reference path="./index.d.ts" />
 
 declare type ccMenuItemCallback = (mi:cc.Node)=>void;
 
@@ -492,7 +491,7 @@ declare namespace cc {
      * - unselected image
      * - selected image
      * - disabled image
-     * 
+     *
      * For best results try that all images are of the same size
      * @class
      * @extends cc.MenuItemSprite

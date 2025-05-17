@@ -1,4 +1,4 @@
-/// <reference path="cocos2d-lib.d.ts" />
+/// <reference path="./index.d.ts" />
 
 
 declare namespace cc {
@@ -36,8 +36,8 @@ declare namespace cc {
     //export function __t(v:Point):Point;
 
     /**
-     * CCDrawNode                                                
-     * Node that draws dots, segments and polygons.                        
+     * CCDrawNode
+     * Node that draws dots, segments and polygons.
      * Faster than the "drawing primitives" since they it draws everything in one single batch.
      * @class
      * @name cc.DrawNode

@@ -1,5 +1,4 @@
-/// <reference path="cocos2d-lib.d.ts" />
-
+/// <reference path="./index.d.ts" />
 
 /**
  * The namespace for jsb exclusive APIs, all APIs in this namespace should never be used in Web engine.

@@ -231,7 +231,7 @@ declare module cc {
      * @param {cc.Point} nodePoint
      * @return {cc.Point}
      */
-    public convertToWorldSpaceAR(nodePoint: Vec2): Vec2;
+    public convertToWorldSpaceAR(nodePoint: Point): Point;
 
     public doEnumerate(name: string, callback: (arg: Node) => boolean): void;
 
@@ -1518,6 +1518,7 @@ declare module cc {
      * @param {boolean} recursive whether call its children's transform
      */
     public transform(parentCmd: Node.RenderCmd, recursive: boolean): void;
+    public setTransform(parentCmd: Node.RenderCmd, recursive: boolean): void;
 
     // TODO: The comments say to never call this externally, but it's not marked as private (no '_' prefix).
     //       Determine whether or not this should be exposed, and if not, remove it.

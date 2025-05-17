@@ -1,5 +1,4 @@
-/// <reference path="cocos2d-lib.d.ts" />
-
+/// <reference path="./index.d.ts" />
 
 declare namespace cc {
     // Interface, consolidate all properties/methods common across cc2d label types here.

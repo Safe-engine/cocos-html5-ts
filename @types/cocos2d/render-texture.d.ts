@@ -1,11 +1,11 @@
-/// <reference path="cocos2d-lib.d.ts" />
+/// <reference path="./index.d.ts" />
 
 declare namespace cc {
 
   ////////////////////////////////////////////////////////////////////////////////
   // File: cocos2d/render-texture/CCRenderTexture.js
   ////////////////////////////////////////////////////////////////////////////////
-    
+
   /**
    * enum for jpg
    * @const {number} IMAGE_FORMAT_JPEG
@@ -30,7 +30,7 @@ declare namespace cc {
    * Constructor
    */
   export function NextPOT(x: number): number
-  
+
   /**
    * cc.RenderTexture is a generic rendering target. To render things into it,<br/>
    * simply construct a render target, call begin on it, call visit on any cocos<br/>
@@ -60,32 +60,32 @@ declare namespace cc {
      * @member {number} clearFlags
      */
     public clearFlags: number
-    
+
     /**
      * Value for clearDepth. Valid only when autoDraw is true.
      * @member {number} clearDepthVal
      */
     public clearDepthVal: number
-    
+
     /**
      * When enabled, it will render its children into the texture automatically. Disabled by default for compatiblity reasons. <br/>
      * Will be enabled in the future.
      * @member {boolean} autoDraw
      */
     public autoDraw: boolean
-    
+
     /**
      * Value for clear Stencil. Valid only when autoDraw is true
      * @member {number} clearStencilVal
      */
     public clearStencilVal: number
-    
+
     /**
      * Clear color value. Valid only when "autoDraw" is true.
      * @member {cc.Color} clearColorVal
      */
     public clearColorVal: Color
-    
+
     /**
      * creates a RenderTexture object with width and height in Points and a pixel format, only RGB and RGBA formats are valid
      * Constructor of cc.RenderTexture for Canvas
@@ -99,13 +99,13 @@ declare namespace cc {
      * @function
      */
     public constructor(width: number, height: number, format?: number, depthStencilFormat?: number)
-    
+
     /**
      * Clear RenderTexture.
      * @function
      */
     public cleanup(): void
-    
+
     /**
      * Used for grab part of screen to a texture.
      * @param {cc.Point} rtBegin
@@ -130,7 +130,7 @@ declare namespace cc {
      * @function
      */
     public begin(): void
-    
+
     /**
      * starts rendering to the texture while clearing the texture first.<br/>
      * This is more efficient then calling -clear first and then -begin
