@@ -1519,6 +1519,7 @@ declare module cc {
      */
     public transform(parentCmd: Node.RenderCmd, recursive: boolean): void;
     public setTransform(parentCmd: Node.RenderCmd, recursive: boolean): void;
+    public setTransform(x: number, y: number, scaleX: number, scaleY: number, rotation: number, skew: number, clockwise: number, pivotX: number, pivotY: number): void;
 
     // TODO: The comments say to never call this externally, but it's not marked as private (no '_' prefix).
     //       Determine whether or not this should be exposed, and if not, remove it.
