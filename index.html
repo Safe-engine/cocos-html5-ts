@@ -29,6 +29,8 @@
 
         cc.loader.load([
           "res/frame.png",
+          "shaders/outline.vsh",
+          "shaders/outline.fsh",
           "shaders/default.vsh",
           "shaders/nine_slice.fsh"
         ], function () {
@@ -43,8 +45,8 @@
           //   sprite.setScale(2);
           layer.addChild(sprite);
 
-          let vert = cc.loader.getRes("shaders/default.vsh");
-          let frag = cc.loader.getRes("shaders/nine_slice.fsh");
+          let vert = cc.loader.getRes("shaders/outline.vsh");
+          let frag = cc.loader.getRes("shaders/outline.fsh");
           // console.log('vertShader', vert)
           // console.log('fragShader', frag)
           let program = new cc.GLProgram();
@@ -57,9 +59,9 @@
           let texSize = sprite.getTexture().getContentSize();
           let spSize = sprite.getContentSize();
 
-          // glState.setUniformVec4("edgeInset", cc.p(0.2, 0.2, 0.2, 0.2)); // UV
-          // glState.setUniformVec2("textureSize", texSize);
-          // glState.setUniformVec2("spriteSize", spSize);
+          glState.setUniformVec2("u_resolution", texSize);       // kích thước texture
+          glState.setUniformVec4("u_outlineColor", cc.color(255, 0, 0, 255)); // đỏ
+          glState.setUniformFloat("u_thickness", 3.0);           // pixel viền
 
           sprite.setGLProgramState(glState);
         });
