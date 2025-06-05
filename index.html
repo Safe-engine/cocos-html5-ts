@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Shader - Cocos2d-JS</title>
+  <style>
+    canvas {
+      background: #222;
+      margin: auto;
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="gameCanvas" width="800" height="600"></canvas>
+
+  <script src="frameworks/cocos2d-html5/CCBoot.js"></script> <!-- Dùng bản local tải từ cocos2d-x.org -->
+
+  <script>
+    window.onload = function () {
+      cc.game.onStart = function () {
+        cc.view.setDesignResolutionSize(800, 600, cc.ResolutionPolicy.SHOW_ALL);
+
+        let scene = new cc.Scene();
+        let layer = new cc.Layer();
+        scene.addChild(layer);
+
+        cc.loader.load([
+          "res/frame.png",
+          "shaders/default.vsh",
+          "shaders/nine_slice.fsh"
+        ], function () {
+          let sprite = new cc.Sprite("res/frame.png");
+          let texture = sprite.getTexture();
+          console.log('texture', texture)
+          if (!texture || texture.getContentSize().width === 0) {
+            console.error("Texture chưa sẵn sàng, không thể set shader.");
+            return;
+          }
+          sprite.setPosition(cc.winSize.width / 2, cc.winSize.height / 2);
+          //   sprite.setScale(2);
+          layer.addChild(sprite);
+
+          let vert = cc.loader.getRes("shaders/default.vsh");
+          let frag = cc.loader.getRes("shaders/nine_slice.fsh");
+          // console.log('vertShader', vert)
+          // console.log('fragShader', frag)
+          let program = new cc.GLProgram();
+          program.initWithString(vert, frag);
+          program.link();
+          program.updateUniforms();
+
+          let glState = new cc.GLProgramState(program);
+
+          let texSize = sprite.getTexture().getContentSize();
+          let spSize = sprite.getContentSize();
+
+          // glState.setUniformVec4("edgeInset", cc.p(0.2, 0.2, 0.2, 0.2)); // UV
+          // glState.setUniformVec2("textureSize", texSize);
+          // glState.setUniformVec2("spriteSize", spSize);
+
+          sprite.setGLProgramState(glState);
+        });
+
+        cc.director.runScene(scene);
+      };
+      cc.game.run();
+    };
+  </script>
+</body>
+
+</html>
