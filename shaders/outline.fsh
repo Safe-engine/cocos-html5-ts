@@ -2,29 +2,21 @@
 precision mediump float;
 #endif
 
+varying vec4 v_fragmentColor;
 varying vec2 v_texCoord;
-// uniform sampler2D CC_Texture0;
-uniform vec2 u_resolution;
-uniform vec4 u_outlineColor; // viền RGBA
-uniform float u_thickness;   // độ dày viền (pixel)
 
-void main() {
-    float alpha = 0.0;
-    vec4 baseColor = texture2D(CC_Texture0, v_texCoord);
+void main()
+{
+    vec4 texColor = texture2D(CC_Texture0, v_texCoord);
 
-    // Lấy mẫu texture tại 8 hướng xung quanh
-    for (float x = -1.0; x <= 1.0; x++) {
-        for (float y = -1.0; y <= 1.0; y++) {
-            if (x == 0.0 && y == 0.0) continue;
-            vec2 offset = vec2(x, y) * u_thickness / u_resolution;
-            alpha = max(alpha, texture2D(CC_Texture0, v_texCoord + offset).a);
-        }
-    }
+    // Tăng độ sáng (brightness)
+    float brightness = 0.2; // Giá trị >1 làm ảnh sáng hơn, có thể điều chỉnh
+    vec3 glowColor = texColor.rgb * brightness;
 
-    // Nếu pixel hiện tại trong suốt nhưng xung quanh có alpha > 0 thì là viền
-    if (baseColor.a < 0.1 && alpha > 0.0) {
-        gl_FragColor = u_outlineColor;
-    } else {
-        gl_FragColor = baseColor;
-    }
+    // Đảm bảo giá trị không vượt quá 1.0
+    glowColor = min(glowColor, vec3(1.0));
+
+    // gl_FragColor = vec4(glowColor, texColor.a) * v_fragmentColor;
+    gl_FragColor = texColor * v_fragmentColor;
+    gl_FragColor = vec4(glowColor, 0.0) * v_fragmentColor;
 }

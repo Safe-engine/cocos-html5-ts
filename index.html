@@ -59,9 +59,9 @@
           let texSize = sprite.getTexture().getContentSize();
           let spSize = sprite.getContentSize();
 
-          glState.setUniformVec2("u_resolution", texSize);       // kích thước texture
-          glState.setUniformVec4("u_outlineColor", cc.color(255, 0, 0, 255)); // đỏ
-          glState.setUniformFloat("u_thickness", 3.0);           // pixel viền
+          // glState.setUniformVec2("u_resolution", texSize);       // kích thước texture
+          // glState.setUniformVec4("u_outlineColor", cc.color(255, 255, 0, 255)); // đỏ
+          // glState.setUniformFloat("u_thickness", 30.0);           // pixel viền
 
           sprite.setGLProgramState(glState);
         });
