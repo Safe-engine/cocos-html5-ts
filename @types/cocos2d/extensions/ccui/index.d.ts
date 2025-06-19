@@ -124,6 +124,16 @@ declare namespace ccui {
     enableShadow(color: Color4B, offset: Size, blur: number)
   }
 
+  export class TextField extends Widget {
+    getString(): string
+    setPlaceHolder(pl: string): void
+    setFontName(font: string): void
+    setFontSize(sz: number): void
+    setTextColor(color: Color4B): void
+    setMaxLengthEnabled(yes: boolean): void
+    setPasswordEnabled(yes: boolean): void
+  }
+
   export class RichElement extends Node {
   }
   export class RichElementText extends RichElement {
