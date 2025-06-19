@@ -131,6 +131,7 @@ declare namespace ccui {
     setFontSize(sz: number): void
     setTextColor(color: Color4B): void
     setMaxLengthEnabled(yes: boolean): void
+    setMaxLength(max: number): void
     setPasswordEnabled(yes: boolean): void
   }
 
