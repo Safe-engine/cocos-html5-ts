@@ -1,6 +1,6 @@
 {
   "name": "cocos-html5-ts",
-  "version": "1.1.8",
+  "version": "1.1.9",
   "description": "cocos html5 lib for safex engine",
   "main": "lib/cocos2d-3.17.js",
   "scripts": {
