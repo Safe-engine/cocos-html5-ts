@@ -1165,7 +1165,7 @@ declare namespace cc {
     /**
      * Run game.
      */
-    interface RunOptions {
+    export interface RunOptions {
       debugMode: 1 | 0
       showFPS: boolean
       frameRate: number
