@@ -29,6 +29,7 @@
 /// <reference path="labels.d.ts" />
 /// <reference path="menus.d.ts" />
 /// <reference path="particle.d.ts" />
+/// <reference path="motion-streak.d.ts" />
 /// <reference path="render-texture.d.ts" />
 /// <reference path="shape-nodes.d.ts" />
 /// <reference path="progress-timer.d.ts" />

@@ -1,4 +1,5 @@
 declare namespace ccui {
+type Color4B = cc.Color;
 
   export class Margin {
     left: number;
@@ -135,7 +136,10 @@ declare namespace ccui {
     setPasswordEnabled(yes: boolean): void
   }
 
-  export class RichElement extends Node {
+  export class Scale9Sprite extends cc.Sprite {
+    constructor(file?: string, rectOrCapInsets?: cc.Rect, capInsets?: cc.Rect)
+  }
+  export class RichElement extends cc.Node {
   }
   export class RichElementText extends RichElement {
     static create(tag: number, color: Color4B, opacity: number, text: string, fontName: string, fontSize: number): RichElementText
@@ -202,7 +206,7 @@ declare namespace ccui {
 
   interface WidgetHelper {
     doLayout<T extends cc.Node>(layout: Layout | T): void;
-    seekWidgetByName(root: ccui.Node, name: string): ccui.Widget;
+    seekWidgetByName(root: cc.Node, name: string): ccui.Widget;
   }
 
   declare namespace Widget {
@@ -210,4 +214,5 @@ declare namespace ccui {
     export type TouchEventType = typeof Widget.TOUCH_BEGAN | typeof Widget.TOUCH_MOVED
   }
   var helper: WidgetHelper;
+
 }
