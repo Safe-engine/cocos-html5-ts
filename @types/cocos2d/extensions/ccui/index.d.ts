@@ -1,5 +1,5 @@
 declare namespace ccui {
-type Color4B = cc.Color;
+  type Color4B = cc.Color;
 
   export class Margin {
     left: number;
@@ -137,7 +137,7 @@ type Color4B = cc.Color;
   }
 
   export class Scale9Sprite extends cc.Sprite {
-    constructor(file?: string, rectOrCapInsets?: cc.Rect, capInsets?: cc.Rect)
+    constructor(file?: string | cc.Texture2D | cc.SpriteFrame, rectOrCapInsets?: cc.Rect, capInsets?: cc.Rect)
   }
   export class RichElement extends cc.Node {
   }
