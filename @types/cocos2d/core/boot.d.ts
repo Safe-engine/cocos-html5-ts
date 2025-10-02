@@ -41,6 +41,23 @@ declare namespace cc {
   export const BATCH_VERTEX_COUNT: number
   export const SHADER_SPRITE_POSITION_TEXTURECOLOR: number
   export const OPTIMIZE_BLEND_FUNC_FOR_PREMULTIPLIED_ALPHA: number
+  export interface Misc {
+    radiansToDegrees(angle: number): number
+    degreesToRadians: (angle: number) => number
+    clampf: (value: number, min_inclusive: number, max_inclusive: number) => number
+    lerp: (a: number, b: number, r: number) => number
+  }
+  export interface Macro {
+    REPEAT_FOREVER: number
+  }
+  export interface TextureCache {
+    addImage(texturePath: string): Texture2D
+    getTextureForKey(key: string): Texture2D
+  }
+
+  export let misc: Misc
+  export let macro: Macro
+  export let textureCache: TextureCache
 
   function inherits(obj: any, target: any): void
   function kmGLMatrixMode(target: any): void
@@ -83,7 +100,7 @@ declare namespace cc {
 
   export function assert(test: boolean, msg: string): void
 
-  export function newElement(x)
+  export function newElement(x: any): void
 
   // export function _addEventListener(element, type, listener, useCapture);
 
@@ -370,6 +387,7 @@ declare namespace cc {
     export function loadTxt(url: string, cb: any): void
 
     export function loadCsb(url: string, cb: any): void
+    export function loadBinary(url: string, cb: (err: Error, data: any) => void): void
 
     /**
      * Load a single resource as json.
@@ -403,7 +421,7 @@ declare namespace cc {
      * @param {function|Object} [loadCallback]
      * @return {cc.AsyncPool}
      */
-    export function load(resources: string | (string | { type: string, name: string, srcs: string[] })[], option?: (result, count: number, loadedCount: number) => void, loadCallback?: () => void): AsyncPool
+    export function load(resources: string | (string | { type: string, name: string, srcs: string[] })[], option?: (result: any, count: number, loadedCount: number) => void, loadCallback?: () => void): AsyncPool
 
     /**
      * <p>
@@ -441,7 +459,7 @@ declare namespace cc {
      * @param {string} extNames
      * @param {function} loader
      */
-    export function register(extNames: string, loader: any): void
+    export function register(extNames: string | string[], loader: any): void
 
     /**
      * Get resource data by url.
@@ -1128,13 +1146,13 @@ declare namespace cc {
      * Callback when the scripts of engine have been load.
      * @type {Function}
      */
-    export function onStart()
+    export function onStart(): void
 
     /**
      * Callback when game exits.
      * @type {Function}
      */
-    export function onStop()
+    export function onStop(): void
 
     /**
      * Set frameRate of game.
@@ -1184,10 +1202,5 @@ declare namespace cc {
      * @param cb
      */
     export function prepare(cb?: () => void): void
-  }
-
-  export namespace loader {
-    export function register(types: string[], option)
-    export function loadBinary(url: string, cb: (err, data) => void)
   }
 }
