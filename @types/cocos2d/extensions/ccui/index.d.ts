@@ -144,6 +144,9 @@ declare namespace ccui {
   export class RichElementText extends RichElement {
     static create(tag: number, color: Color4B, opacity: number, text: string, fontName: string, fontSize: number): RichElementText
   }
+  export class RichElementCustomNode extends RichElement {
+    static create(tag: number, color: Color4B, opacity: number, label?: any): RichElementText
+  }
   export class RichText extends Widget {
     constructor();
     pushBackElement(val: RichElement): void;

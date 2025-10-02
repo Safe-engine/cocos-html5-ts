@@ -1185,4 +1185,9 @@ declare namespace cc {
      */
     export function prepare(cb?: () => void): void
   }
+
+  export namespace loader {
+    export function register(types: string[], option)
+    export function loadBinary(url: string, cb: (err, data) => void)
+  }
 }
