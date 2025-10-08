@@ -4,11 +4,12 @@ const path = require('path')
 // console.log(ClosureCompiler.COMPILER_PATH); // absolute path to the compiler jar
 // console.log(ClosureCompiler.CONTRIB_PATH); // absolute path to the contrib folder which contain externs
 const modules = [
-  "cocos2d",
-  "gui",
-  "ccui",
+  "base4webgl", "render-texture", "motion-streak",
+  "clipping-nodes", "shape-nodes", "actions",
+  "progress-timer", "labels", "compression", "particle",
+  "text-input", "tilemap", "audio"
 ]
-const engineDir = 'cocos2d-html5'
+const engineDir = 'frameworks/cocos2d-html5'
 const _jsAddedCache = {}
 const configFile = path.join(__dirname, engineDir, 'moduleConfig.json')
 const moduleMap = JSON.parse(fs.readFileSync(configFile)).module

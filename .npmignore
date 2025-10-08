@@ -76,3 +76,7 @@ cocos2d-html5
 index.js
 node_modules/.bin/
 cached-package.json
+shaders/
+res/
+index.html
+project.json
