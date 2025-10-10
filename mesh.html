@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Shader - Cocos2d-JS</title>
+  <style>
+    canvas {
+      background: #222;
+      margin: auto;
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="gameCanvas" width="800" height="600"></canvas>
+
+  <script src="frameworks/cocos2d-html5/CCBoot.js"></script> <!-- Dùng bản local tải từ cocos2d-x.org -->
+  <script src="src/mesh.js"></script>
+
+  <script>
+    window.onload = function () {
+      cc.game.onStart = function () {
+        createSimpleMeshNode();
+        cc.view.setDesignResolutionSize(800, 600, cc.ResolutionPolicy.SHOW_ALL);
+
+        let scene = new cc.Scene();
+        let layer = new cc.Layer();
+        scene.addChild(layer);
+
+        cc.loader.load([
+          "res/frame.png",
+        ], function () {
+          var tex = cc.textureCache.addImage("res/frame.png");
+          var q = cc.SimpleMeshNode.createQuad(0, 0, 200, 200, 0, 0, 1, 1);
+          var meshNode = new cc.SimpleMeshNode(tex, q.vertices, q.uvs, q.indices);
+          meshNode.setPosition(200, 200);
+          meshNode.setAnchorPoint(0.5, 0.5);
+          meshNode.setRotation(30);
+          let sprite = new cc.Sprite("res/frame.png");
+          sprite.setPosition(400, 300);
+          scene.addChild(meshNode);
+          scene.addChild(sprite);
+        });
+
+        cc.director.runScene(scene);
+      };
+      cc.game.run();
+    };
+  </script>
+</body>
+
+</html>

@@ -63,6 +63,7 @@ declare namespace cc {
   function kmGLMatrixMode(target: any): void
   function kmGLPopMatrix(): void
   function glBindTexture2D(target: any): void
+  function glUseProgram(target: any): void
   function defineGetterSetter(obj: any, prop: string, target: any): void
   type LoadJsonCallback = (error: Error, json: {}) => void
 

@@ -3,5 +3,6 @@
     "frameRate"     : 60,
     "id"            : "gameCanvas",
     "renderMode"    : 2,
-    "jsList"        : []
+    "jsList"        : [],
+    "modules"        : ["cocos2d"]
 }
