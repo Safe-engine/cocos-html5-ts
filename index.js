@@ -7,7 +7,7 @@ const modules = [
   "base4webgl", "render-texture", "motion-streak",
   "clipping-nodes", "shape-nodes", "actions",
   "progress-timer", "labels", "compression", "particle",
-  "text-input", "tilemap", "audio"
+  "text-input", "tilemap", "audio", "ccui"
 ]
 const engineDir = 'frameworks/cocos2d-html5'
 const _jsAddedCache = {}
