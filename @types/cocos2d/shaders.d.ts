@@ -13,6 +13,8 @@ declare namespace cc {
     addAttribute(attributeName: string, index: number): void;
     updateUniforms(): void;
     getProgram(): GLProgram
+    getUniformLocationForName(name: string): WebGLUniformLocation
+    addAttribute(name: string, i: number): void
   }
   class GLProgramState {
     // Properties

@@ -60,8 +60,6 @@ declare namespace cc {
   export let textureCache: TextureCache
 
   function inherits(obj: any, target: any): void
-  function kmGLMatrixMode(target: any): void
-  function kmGLPopMatrix(): void
   function glBindTexture2D(target: any): void
   function glUseProgram(target: any): void
   function defineGetterSetter(obj: any, prop: string, target: any): void
