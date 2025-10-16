@@ -1,5 +1,6 @@
 /// <reference path="../cocos2d/index.d.ts" />
 /// <reference path="space.d.ts" />
+/// <reference path="util.d.ts" />
 
 declare namespace cc {
   export class PhysicsSprite extends Sprite {

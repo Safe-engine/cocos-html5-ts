@@ -1191,7 +1191,7 @@ declare namespace cc {
       id: string
       renderMode: 0 | 1 | 2
     }
-    export function run(option: RunOptions, onStart: () => void): void
+    export function run(option?: RunOptions, onStart?: () => void): void
 
     /**
      * End game, it will close the game window.

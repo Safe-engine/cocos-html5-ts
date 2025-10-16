@@ -152,6 +152,8 @@ declare module cc {
      */
     public init(): boolean;
 
+    setGLProgramState(state: GLProgramState)
+
     /** "add" logic MUST only be in this method
      *
      * If the child is added to a 'running' node, then 'onEnter' and 'onEnterTransitionDidFinish' will be called immediately.

@@ -1,9 +1,10 @@
 {
   "name": "cocos-html5-ts",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "cocos html5 lib for safex engine",
   "main": "lib/cocos2d-3.17.js",
   "scripts": {
+    "dev": "pnpm vite",
     "prepublishOnly": "node ./scripts/cleanse-pkg.js",
     "postpublish": "node ./scripts/restore-pkg.js",
     "start": "node ./index.js"
@@ -13,5 +14,8 @@
   "license": "ISC",
   "dependencies": {
     "google-closure-compiler": "^20240317.0.0"
+  },
+  "devDependencies": {
+    "vite": "^7.1.10"
   }
 }

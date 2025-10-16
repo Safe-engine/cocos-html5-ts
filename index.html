@@ -18,59 +18,7 @@
 
   <script src="frameworks/cocos2d-html5/CCBoot.js"></script> <!-- Dùng bản local tải từ cocos2d-x.org -->
 
-  <script>
-    window.onload = function () {
-      cc.game.onStart = function () {
-        cc.view.setDesignResolutionSize(800, 600, cc.ResolutionPolicy.SHOW_ALL);
-
-        let scene = new cc.Scene();
-        let layer = new cc.Layer();
-        scene.addChild(layer);
-
-        cc.loader.load([
-          "res/frame.png",
-          "shaders/outline.vsh",
-          "shaders/outline.fsh",
-          // "shaders/default.vsh",
-          // "shaders/nine_slice.fsh"
-        ], function () {
-          let sprite = new cc.Sprite("res/frame.png");
-          let texture = sprite.getTexture();
-          console.log('texture', texture)
-          if (!texture || texture.getContentSize().width === 0) {
-            console.error("Texture chưa sẵn sàng, không thể set shader.");
-            return;
-          }
-          sprite.setPosition(cc.winSize.width / 2, cc.winSize.height / 2);
-          //   sprite.setScale(2);
-          layer.addChild(sprite);
-
-          let vert = cc.loader.getRes("shaders/outline.vsh");
-          let frag = cc.loader.getRes("shaders/outline.fsh");
-          // console.log('vertShader', vert)
-          // console.log('fragShader', frag)
-          let program = new cc.GLProgram();
-          program.initWithString(vert, frag);
-          program.link();
-          program.updateUniforms();
-
-          let glState = new cc.GLProgramState(program);
-
-          let texSize = sprite.getTexture().getContentSize();
-          let spSize = sprite.getContentSize();
-
-          // glState.setUniformVec2("u_resolution", texSize);       // kích thước texture
-          // glState.setUniformVec4("u_outlineColor", cc.color(255, 255, 0, 255)); // đỏ
-          // glState.setUniformFloat("u_thickness", 30.0);           // pixel viền
-
-          sprite.setGLProgramState(glState);
-        });
-
-        cc.director.runScene(scene);
-      };
-      cc.game.run();
-    };
-  </script>
+  <script type="module" src="src/main.ts"></script>
 </body>
 
 </html>
