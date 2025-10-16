@@ -4,14 +4,14 @@
 /// <reference path="space.d.ts" />
 /// <reference path="vect.d.ts" />
 
-namespace cp {
-  export declare class ContactPoint {
+declare namespace cp {
+  export class ContactPoint {
     point: Vect;
     normal: Vect;
     dist: number;
     constructor(point: Vect, normal: Vect, dist: number);
   }
-  export declare class CollisionHandler {
+  export class CollisionHandler {
     a: number;
     b: number;
     constructor();
@@ -20,8 +20,8 @@ namespace cp {
     postSolve(arb: Arbiter, space: Space): void;
     separate(arb: Arbiter, space: Space): void;
   }
-  export declare type ArbiterState = ("first-coll" | "normal" | "ignore" | "cached");
-  export declare class Arbiter {
+  export type ArbiterState = ("first-coll" | "normal" | "ignore" | "cached");
+  export class Arbiter {
     e: number;
     u: number;
     vrSurface: Vect;

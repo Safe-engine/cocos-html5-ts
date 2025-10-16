@@ -1,8 +1,8 @@
 /// <reference path="shapes.d.ts" />
 /// <reference path="vect.d.ts" />
 
-namespace cp {
-  export declare class Contact {
+declare namespace cp {
+  export class Contact {
     p: Vect;
     n: Vect;
     dist: number;
@@ -18,5 +18,5 @@ namespace cp {
     hash: any;
     constructor(p: Vect, n: Vect, dist: number, hash: any);
   }
-  export declare function collideShapes(a: Shape, b: Shape): any;
+  export function collideShapes(a: Shape, b: Shape): any;
 }

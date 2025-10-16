@@ -3,8 +3,8 @@
 /// <reference path="spatial-index.d.ts" />
 /// <reference path="vect.d.ts" />
 
-namespace cp {
-  export declare class BBTreeIndex extends SpatialIndex {
+declare namespace cp {
+  export class BBTreeIndex extends SpatialIndex {
     private tree;
     private activeShapes;
     insertStatic(shape: Shape): void;

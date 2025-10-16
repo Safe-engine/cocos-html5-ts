@@ -1,8 +1,8 @@
 /// <reference path="../body.d.ts" />
 /// <reference path="../space.d.ts" />
 
-namespace cp {
-  export declare abstract class Constraint {
+declare namespace cp {
+  export abstract class Constraint {
     a: Body;
     b: Body;
     space: Space;

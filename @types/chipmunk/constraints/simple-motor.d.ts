@@ -1,8 +1,8 @@
-/// <reference path="space.d.ts" />
-import { Body } from "../body";
-import { Constraint } from "./constraint";
-namespace cp {
-  export declare class SimpleMotor extends Constraint {
+/// <reference path="../space.d.ts" />
+/// <reference path="constraint.d.ts" />
+
+declare namespace cp {
+  export class SimpleMotor extends Constraint {
     rate: number;
     jAcc: number;
     iSum: number;

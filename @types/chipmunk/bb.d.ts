@@ -1,7 +1,7 @@
 /// <reference path="vect.d.ts" />
 
-namespace cp {
-  export declare class BB {
+declare namespace cp {
+  export class BB {
     readonly l: number;
     readonly b: number;
     readonly r: number;
@@ -11,14 +11,14 @@ namespace cp {
     containsBox(other: BB): boolean;
     expand(vect: Vect): BB;
   }
-  export declare function bb(l: number, b: number, r: number, t: number): BB;
-  export declare function bbNewForCircle(c: Vect, r: number): BB;
-  export declare function bbIntersects(boxA: BB, boxB: BB): boolean;
-  export declare function bbIntersects2(box: BB, l: number, b: number, r: number, t: number): boolean;
-  export declare function bbMerge(boxA: BB, boxB: BB): BB;
-  export declare function bbArea(box: BB): number;
-  export declare function bbMergedArea(boxA: BB, boxB: BB): number;
-  export declare function bbMergedArea2(box: BB, l: number, b: number, r: number, t: number): number;
-  export declare function bbClampVect(box: BB, vect: Vect): Vect;
-  export declare function bbWrapVect(box: BB, vect: Vect): Vect;
+  export function bb(l: number, b: number, r: number, t: number): BB;
+  export function bbNewForCircle(c: Vect, r: number): BB;
+  export function bbIntersects(boxA: BB, boxB: BB): boolean;
+  export function bbIntersects2(box: BB, l: number, b: number, r: number, t: number): boolean;
+  export function bbMerge(boxA: BB, boxB: BB): BB;
+  export function bbArea(box: BB): number;
+  export function bbMergedArea(boxA: BB, boxB: BB): number;
+  export function bbMergedArea2(box: BB, l: number, b: number, r: number, t: number): number;
+  export function bbClampVect(box: BB, vect: Vect): Vect;
+  export function bbWrapVect(box: BB, vect: Vect): Vect;
 }

@@ -1,8 +1,8 @@
-/// <reference path="space.d.ts" />
-import { Body } from "../body";
-import { Constraint } from "./constraint";
-namespace cp {
-  export declare class RotaryLimitJoint extends Constraint {
+/// <reference path="../space.d.ts" />
+/// <reference path="constraint.d.ts" />
+
+declare namespace cp {
+  export class RotaryLimitJoint extends Constraint {
     min: number;
     max: number;
     jAcc: number;

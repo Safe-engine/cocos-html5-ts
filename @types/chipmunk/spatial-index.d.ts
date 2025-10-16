@@ -19,8 +19,8 @@
  * be reading any of the fields directly.
  */
 
-namespace cp {
-  export declare abstract class SpatialIndex {
+declare namespace cp {
+  export abstract class SpatialIndex {
     count: number;
     abstract contains(shape: Shape): boolean;
     abstract insert(shape: Shape): void;

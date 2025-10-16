@@ -4,10 +4,10 @@ const path = require('path')
 // console.log(ClosureCompiler.COMPILER_PATH); // absolute path to the compiler jar
 // console.log(ClosureCompiler.CONTRIB_PATH); // absolute path to the contrib folder which contain externs
 const modules = [
-  "base4webgl", "render-texture", "motion-streak",
+  "core", "kazmath", "shaders", "render-texture", "motion-streak",
   "clipping-nodes", "shape-nodes", "actions",
-  "progress-timer", "labels", "compression", "particle",
-  "text-input", "tilemap", "audio", "ccui"
+  "progress-timer", "labels", "compression",
+  "text-input", "ccui"
 ]
 const engineDir = 'frameworks/cocos2d-html5'
 const _jsAddedCache = {}
@@ -48,8 +48,82 @@ const closureCompiler = new ClosureCompiler({
   debug: true
 });
 
-const compilerProcess = closureCompiler.run((exitCode, stdOut, stdErr) => {
+closureCompiler.run((exitCode, stdOut, stdErr) => {
   //compilation complete
-  console.log('err', stdErr)
+  if (stdErr) console.log('err', stdErr)
   console.log('done', stdOut)
+});
+
+new ClosureCompiler({
+  js: [
+    "cocos2d/physics/CCPhysicsSprite.js",
+    "cocos2d/physics/CCPhysicsDebugNode.js",
+    "cocos2d/physics/CCPhysicsDebugNodeCanvasRenderCmd.js",
+    "cocos2d/physics/CCPhysicsDebugNodeWebGLRenderCmd.js",
+    "cocos2d/physics/CCPhysicsSpriteCanvasRenderCmd.js",
+    "cocos2d/physics/CCPhysicsSpriteWebGLRenderCmd.js",
+    "external/chipmunk/chipmunk.js"
+  ].map(f => engineDir + '/' + f),
+  js_output_file: 'lib/chipmunk.min.js',
+  compilation_level: 'WHITESPACE_ONLY',
+  debug: true
+}).run((exitCode, stdOut, stdErr) => {
+  //compilation complete
+  if (stdErr) console.log('err chipmunk', stdErr)
+  console.log('done chipmunk', stdOut)
+});
+
+new ClosureCompiler({
+  js: [
+    "cocos2d/compression/gzip.js",
+    "cocos2d/compression/zlib.min.js",
+    "cocos2d/tilemap/CCTGAlib.js",
+    "cocos2d/tilemap/CCTMXTiledMap.js",
+    "cocos2d/tilemap/CCTMXXMLParser.js",
+    "cocos2d/tilemap/CCTMXObjectGroup.js",
+    "cocos2d/tilemap/CCTMXLayer.js",
+    "cocos2d/tilemap/CCTMXLayerCanvasRenderCmd.js",
+    "cocos2d/tilemap/CCTMXLayerWebGLRenderCmd.js"
+  ].map(f => engineDir + '/' + f),
+  js_output_file: 'lib/tilemap.min.js',
+  compilation_level: 'WHITESPACE_ONLY',
+  debug: true
+}).run((exitCode, stdOut, stdErr) => {
+  //compilation complete
+  if (stdErr) console.log('err tilemap', stdErr)
+  console.log('done tilemap', stdOut)
+});
+
+new ClosureCompiler({
+  js: [
+    "cocos2d/particle/CCPNGReader.js",
+    "cocos2d/particle/CCTIFFReader.js",
+    "cocos2d/particle/CCParticleSystem.js",
+    "cocos2d/particle/CCParticleSystemCanvasRenderCmd.js",
+    "cocos2d/particle/CCParticleSystemWebGLRenderCmd.js",
+    "cocos2d/particle/CCParticleExamples.js",
+    "cocos2d/particle/CCParticleBatchNode.js",
+    "cocos2d/particle/CCParticleBatchNodeCanvasRenderCmd.js",
+    "cocos2d/particle/CCParticleBatchNodeWebGLRenderCmd.js"
+  ].map(f => engineDir + '/' + f),
+  js_output_file: 'lib/particle.min.js',
+  compilation_level: 'WHITESPACE_ONLY',
+  debug: true
+}).run((exitCode, stdOut, stdErr) => {
+  //compilation complete
+  if (stdErr) console.log('err particle', stdErr)
+  console.log('done particle', stdOut)
+});
+
+new ClosureCompiler({
+  js: [
+    "cocos2d/audio/CCAudio.js"
+  ].map(f => engineDir + '/' + f),
+  js_output_file: 'lib/audio.min.js',
+  compilation_level: 'WHITESPACE_ONLY',
+  debug: true
+}).run((exitCode, stdOut, stdErr) => {
+  //compilation complete
+  if (stdErr) console.log('err audio', stdErr)
+  console.log('done audio', stdOut)
 });

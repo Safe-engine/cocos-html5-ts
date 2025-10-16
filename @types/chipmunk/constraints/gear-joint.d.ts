@@ -1,8 +1,8 @@
-/// <reference path="space.d.ts" />
-import { Body } from "../body";
-import { Constraint } from "./constraint";
-namespace cp {
-  export declare class GearJoint extends Constraint {
+/// <reference path="../space.d.ts" />
+/// <reference path="constraint.d.ts" />
+
+declare namespace cp {
+  export class GearJoint extends Constraint {
     phase: number;
     ratio: number;
     ratioInv: number;

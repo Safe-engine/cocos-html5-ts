@@ -1,8 +1,8 @@
 /// <reference path="../body.d.ts" />
 /// <reference path="../vect.d.ts" />
 
-namespace cp {
-  export declare class CircleShape extends Shape {
+declare namespace cp {
+  export class CircleShape extends Shape {
     center: Vect;
     radius: number;
     tc: Vect;

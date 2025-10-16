@@ -2,14 +2,14 @@
 /// <reference path="../vect.d.ts" />
 /// <reference path="./base.d.ts" />
 
-namespace cp {
-  export declare class SplittingPlane {
+declare namespace cp {
+  export class SplittingPlane {
     n: Vect;
     d: number;
     constructor(n: Vect, d: number);
     compare(vect: Vect): number;
   }
-  export declare class PolyShape extends Shape {
+  export class PolyShape extends Shape {
     verts: number[];
     tVerts: number[];
     planes: SplittingPlane[];

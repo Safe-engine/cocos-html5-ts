@@ -2,8 +2,8 @@
 /// <reference path="../vect.d.ts" />
 /// <reference path="./base.d.ts" />
 
-namespace cp {
-  export declare class SegmentShape extends Shape {
+declare namespace cp {
+  export class SegmentShape extends Shape {
     a: Vect;
     b: Vect;
     n: Vect;

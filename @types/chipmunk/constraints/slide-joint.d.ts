@@ -1,9 +1,8 @@
-/// <reference path="space.d.ts" />
-import { Body } from "../body";
-import { Vect } from "../vect";
-import { Constraint } from "./constraint";
-namespace cp {
-  export declare class SlideJoint extends Constraint {
+/// <reference path="../space.d.ts" />
+/// <reference path="constraint.d.ts" />
+
+declare namespace cp {
+  export class SlideJoint extends Constraint {
     anchr1: Vect;
     anchr2: Vect;
     min: number;

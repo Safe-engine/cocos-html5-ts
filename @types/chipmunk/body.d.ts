@@ -4,8 +4,8 @@
 /// <reference path="shapes.d.ts" />
 /// <reference path="vect.d.ts" />
 
-namespace cp {
-  export declare class Body {
+declare namespace cp {
+  export  class Body {
     p: Vect;
     v: Vect;
     f: Vect;
@@ -67,5 +67,5 @@ namespace cp {
     sleep(): void;
     sleepWithGroup(group: Body): void;
   }
-  export declare function createStaticBody(): Body;
+  export function createStaticBody(): Body;
 }

@@ -7,8 +7,8 @@
 /// <reference path="spatial-index.d.ts" />
 /// <reference path="vect.d.ts" />
 
-namespace cp {
-  export declare class Space {
+declare namespace cp {
+  export class Space {
     stamp: number;
     dtCurr: number;
     bodies: Body[];

@@ -3,8 +3,8 @@
 /// <reference path="../body.d.ts" />
 /// <reference path="../space.d.ts" />
 
-namespace cp {
-  export declare abstract class Shape {
+declare namespace cp {
+  export abstract class Shape {
     type: string;
     body: Body;
     bbL: number;
@@ -39,19 +39,19 @@ namespace cp {
     abstract segmentQuery(a: Vect, b: Vect): SegmentQueryInfo;
     protected abstract cacheData(pos: Vect, rot: Vect): void;
   }
-  export declare class PointQueryExtendedInfo {
+  export class PointQueryExtendedInfo {
     shape: Shape;
     d: number;
     n: Vect;
     constructor(shape: Shape);
   }
-  export declare class NearestPointQueryInfo {
+  export class NearestPointQueryInfo {
     shape: Shape;
     p: Vect;
     d: number;
     constructor(shape: Shape, p: Vect, d: number);
   }
-  export declare class SegmentQueryInfo {
+  export class SegmentQueryInfo {
     shape: Shape;
     t: number;
     n: Vect;

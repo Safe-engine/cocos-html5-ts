@@ -1,8 +1,8 @@
-/// <reference path="space.d.ts" />
-import { Body } from "../body";
-import { Constraint } from "./constraint";
-namespace cp {
-  export declare class RatchetJoint extends Constraint {
+/// <reference path="../space.d.ts" />
+/// <reference path="constraint.d.ts" />
+
+declare namespace cp {
+  export class RatchetJoint extends Constraint {
     angle: number;
     phase: number;
     ratchet: number;

@@ -1,9 +1,9 @@
 /// <reference path="body.d.ts" />
 
-namespace cp {
-  export declare function componentRoot(body: Body): Body;
-  export declare function componentActivate(root: Body): void;
-  export declare function componentAdd(root: Body, body: Body): void;
-  export declare function floodFillComponent(root: Body, body: Body): void;
-  export declare function componentActive(root: Body, threshold: number): boolean;
+declare namespace cp {
+  export function componentRoot(body: Body): Body;
+  export function componentActivate(root: Body): void;
+  export function componentAdd(root: Body, body: Body): void;
+  export function floodFillComponent(root: Body, body: Body): void;
+  export function componentActive(root: Body, threshold: number): boolean;
 }
