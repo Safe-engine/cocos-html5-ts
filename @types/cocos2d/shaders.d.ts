@@ -4,6 +4,8 @@ declare namespace cc {
   class GLProgram {
     // Properties
     _programObj
+    _vertShader: WebGLShader
+    _fragShader: WebGLShader
     public constructor(vShaderFileName?: string, fShaderFileName?: string, glContext?: GLProgram);
 
     // Methods
@@ -15,6 +17,8 @@ declare namespace cc {
     getProgram(): GLProgram
     getUniformLocationForName(name: string): WebGLUniformLocation
     addAttribute(name: string, i: number): void
+    _updateProjectionUniform(): void
+    use(): void
   }
   class GLProgramState {
     // Properties

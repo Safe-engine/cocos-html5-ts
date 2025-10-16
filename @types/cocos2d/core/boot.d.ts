@@ -37,7 +37,7 @@ declare namespace cc {
   export let renderer: any
   export let shaderCache: any
   export let current_stack: any
-  export const KM_GL_MODELVIEW: number
+  export const RENDER_TYPE_WEBGL: number
   export const BATCH_VERTEX_COUNT: number
   export const SHADER_SPRITE_POSITION_TEXTURECOLOR: number
   export const OPTIMIZE_BLEND_FUNC_FOR_PREMULTIPLIED_ALPHA: number

@@ -106,6 +106,9 @@ declare module cc {
     public static CanvasRenderCmd: any;
     public static WebGLRenderCmd: any;
 
+    _visible: boolean;
+    _stackMatrix: cc.kmMat4;
+    _children: Node[];
     public actionManager: ActionManager;
     public anchorX: number;
     public anchorY: number;

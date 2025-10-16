@@ -30,7 +30,7 @@ window.onload = function () {
       // console.log('fragShader', frag)
       let program = new cc.GLProgram();
       program.initWithString(vert, frag);
-      program.initWithVertexShaderByteArray(vert, frag);
+      // program.initWithVertexShaderByteArray(vert, frag);
       program.addAttribute(cc.ATTRIBUTE_NAME_POSITION, cc.VERTEX_ATTRIB_POSITION);
       program.addAttribute(cc.ATTRIBUTE_NAME_COLOR, cc.VERTEX_ATTRIB_COLOR);
       program.addAttribute(cc.ATTRIBUTE_NAME_TEX_COORD, cc.VERTEX_ATTRIB_TEX_COORDS);
@@ -40,6 +40,7 @@ window.onload = function () {
         return;
       }
       // program.use();
+      console.log('program', program)
       program.updateUniforms();
 
       const glProgState = new cc.GLProgramState(program);

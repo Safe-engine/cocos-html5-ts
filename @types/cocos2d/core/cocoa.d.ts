@@ -168,6 +168,12 @@ declare module cc {
    * @see cc.affineTransformMake
    */
   export class AffineTransform {
+    a: number
+    b: number
+    c: number
+    d: number
+    tx: number
+    ty: number
     constructor(a: number, b: number, c: number, d: number, tx: number, ty: number);
   }
 

@@ -1,10 +1,14 @@
 /// <reference path="./index.d.ts" />
 
 declare namespace cc {
-  const KM_GL_MODELVIEW
+  const KM_GL_MODELVIEW: number
   function kmGLGetMatrix(mode, pOut?): void
   function kmGLMatrixMode(target: any): void
   function kmGLPopMatrix(): void
+  function kmGLPushMatrix(): void
+  function kmMat4Assign(pOut: kmMat4, pIn): void
+  function kmMat4Multiply(pOut, pM1, pM2): void
+  const kmMat4 = math.Matrix4
 }
 declare namespace cc.math {
   // +--------------------------------------------------------------------------------
@@ -26,7 +30,9 @@ declare namespace cc.math {
   // +--------------------------------------------------------------------------------
   // + File: cocos2d/kazmath/mat4.js
   // +--------------------------------------------------------------------------------
-  class Matrix4 { }
+  class Matrix4 {
+    mat: number[] | Float32Array
+  }
   // +--------------------------------------------------------------------------------
   // + File: cocos2d/kazmath/mat4SIMD.js
   // +--------------------------------------------------------------------------------
