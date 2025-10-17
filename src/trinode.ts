@@ -23,9 +23,11 @@ void main() {
 `;
 
     class TriNode extends cc.Node {
-      _color: [number, number, number, number];
-      _program: cc.GLProgram | null = null;
-      _vbo: WebGLBuffer | null = null;
+      private gl: WebGLRenderingContext;
+      private program: cc.GLProgram;
+      private glProgram: WebGLProgram;
+      private vbo: WebGLBuffer;
+      private colorFloat32: [number, number, number, number];
 
       constructor(
         public triWidth = 100,
@@ -34,84 +36,83 @@ void main() {
       ) {
         super();
         super.ctor();
-        this._color = color;
-        console.log(cc._renderType, cc.game.RENDER_TYPE_WEBGL)
-        if (cc._renderType === cc.game.RENDER_TYPE_WEBGL) {
-          this._renderCmd = new TriNode.WebGLRenderCmd(this);
-          (this._renderCmd as any)._needDraw = true;
-        } else {
-          cc.log("TriNode only supports WebGL rendering");
-        }
-      }
-    }
-
-    // ---------- RenderCmd (phần quan trọng) ----------
-    TriNode.WebGLRenderCmd = class extends cc.Node.WebGLRenderCmd {
-      private gl: WebGLRenderingContext;
-      private program: cc.GLProgram;
-      private vbo: WebGLBuffer;
-      private node: TriNode;
-
-      constructor(node: TriNode) {
-        super(node);
-        // super.ctor(node);
-        console.log('constructor TriNode')
-        this.node = node;
         this.gl = cc._renderContext as WebGLRenderingContext;
+        this.colorFloat32 = color;
 
-        // Compile shader
+        // Tạo GLProgram (wrapper)
         const program = new cc.GLProgram();
-        program.initWithVertexShaderByteArray(VERT_SRC, FRAG_SRC);
-        program.link();
+        program.initWithString(VERT_SRC, FRAG_SRC);
+        program.addAttribute(cc.ATTRIBUTE_NAME_POSITION, cc.VERTEX_ATTRIB_POSITION);
+        program.addAttribute(cc.ATTRIBUTE_NAME_COLOR, cc.VERTEX_ATTRIB_COLOR);
+        program.addAttribute(cc.ATTRIBUTE_NAME_TEX_COORD, cc.VERTEX_ATTRIB_TEX_COORDS);
+        if (!program.link()) {
+          console.error("Failed to link shader program");
+          return;
+        }
         program.updateUniforms();
         this.program = program;
-        this._stackMatrix = new cc.kmMat4();
 
-        // Create VBO for triangle
-        const w = node.triWidth;
-        const h = node.triHeight;
+        // Lấy WebGLProgram thực
+        this.glProgram = program.getProgram();
+
+        // Vertex buffer (tam giác)
+        const w = triWidth, h = triHeight;
         const vertices = new Float32Array([
           0, h / 2, 0,
           -w / 2, -h / 2, 0,
           w / 2, -h / 2, 0,
         ]);
-        this.vbo = this.gl.createBuffer()!;
-        this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.vbo);
+        const vbo = this.gl.createBuffer()!;
+        this.gl.bindBuffer(this.gl.ARRAY_BUFFER, vbo);
         this.gl.bufferData(this.gl.ARRAY_BUFFER, vertices, this.gl.STATIC_DRAW);
         this.gl.bindBuffer(this.gl.ARRAY_BUFFER, null);
+        this.vbo = vbo;
       }
 
-      rendering(ctx: WebGLRenderingContext) {
-        // console.log('render', ctx)
-        const gl = this.gl;
-        const node = this.node;
-        const program = this.program;
+      visit(parentCmd?: any) {
+        super.visit(parentCmd);
+        this.renderTriangle();
+      }
 
+      private renderTriangle() {
+        const gl = this.gl;
+        const program = this.program;
         program.use();
         program.setUniformsForBuiltins();
 
-        const mvp = this._stackMatrix.mat; // node's world matrix
-        // console.log(this._renderCmd)
-        // const mvp = this._renderCmd._transformWorld.mat;
-        const locMVP = program.getUniformLocationForName("u_MVPMatrix");
-        gl.uniformMatrix4fv(locMVP, false, mvp);
+        const glProg = this.glProgram;
 
-        const locColor = program.getUniformLocationForName("u_color");
-        gl.uniform4fv(locColor, new Float32Array(node._color));
+        // uniform locations
+        const uMVP = gl.getUniformLocation(glProg, "u_MVPMatrix");
+        const uColor = gl.getUniformLocation(glProg, "u_color");
 
-        const posLoc = gl.getAttribLocation(program.getProgram(), "a_position");
+        // attribute location
+        const aPos = gl.getAttribLocation(glProg, "a_position");
+
+        // node's world matrix
+        console.log(this._renderCmd)
+        var affine = (this as any)._renderCmd._worldTransform
+        const mat4 = new cc.math.Matrix4();
+        mat4.mat = new Float32Array([
+          affine.a, affine.b, 0, 0,
+          affine.c, affine.d, 0, 0,
+          0, 0, 1, 0,
+          affine.tx, affine.ty, 0, 1
+        ]);
+        gl.uniformMatrix4fv(uMVP, false, mat4.mat);
+        gl.uniform4fv(uColor, new Float32Array(this.colorFloat32));
+
         gl.bindBuffer(gl.ARRAY_BUFFER, this.vbo);
-        gl.enableVertexAttribArray(posLoc);
-        gl.vertexAttribPointer(posLoc, 3, gl.FLOAT, false, 0, 0);
+        gl.enableVertexAttribArray(aPos);
+        gl.vertexAttribPointer(aPos, 3, gl.FLOAT, false, 0, 0);
 
         gl.drawArrays(gl.TRIANGLES, 0, 3);
 
-        gl.disableVertexAttribArray(posLoc);
+        gl.disableVertexAttribArray(aPos);
         gl.bindBuffer(gl.ARRAY_BUFFER, null);
         cc.g_NumberOfDraws++;
       }
-    };
-
+    }
     // trong scene hoặc layer của bạn
     const tri = new TriNode(160, 120, [0.2, 0.7, 1.0, 1.0]); // width, height, rgba
     tri.setPosition(200, 150);

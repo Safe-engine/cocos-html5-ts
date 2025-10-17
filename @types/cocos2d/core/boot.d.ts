@@ -30,6 +30,9 @@
  * @name cc
  */
 declare namespace cc {
+  class CustomRenderCmd {
+    constructor(target: cc.Node & any, cb: any)
+  }
   export let _renderType: number
   export let _isContextMenuEnable: boolean
   export let _renderContext: any
