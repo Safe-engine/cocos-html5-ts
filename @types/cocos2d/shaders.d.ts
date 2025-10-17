@@ -14,11 +14,12 @@ declare namespace cc {
     link(): boolean;
     addAttribute(attributeName: string, index: number): void;
     updateUniforms(): void;
-    getProgram(): GLProgram
+    getProgram(): WebGLProgram
     getUniformLocationForName(name: string): WebGLUniformLocation
     addAttribute(name: string, i: number): void
     _updateProjectionUniform(): void
     use(): void
+    setUniformsForBuiltins(): void
   }
   class GLProgramState {
     // Properties
