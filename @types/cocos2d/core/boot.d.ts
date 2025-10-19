@@ -48,7 +48,6 @@ declare namespace cc {
     lerp: (a: number, b: number, r: number) => number
   }
   export interface Macro {
-    REPEAT_FOREVER: number
   }
   export interface TextureCache {
     addImage(texturePath: string): Texture2D
