@@ -32,6 +32,7 @@ declare namespace cc.math {
   // +--------------------------------------------------------------------------------
   class Matrix4 {
     mat: number[] | Float32Array
+    static multiply(out: Matrix4, p: Matrix4, n: Matrix4): Matrix4
   }
   // +--------------------------------------------------------------------------------
   // + File: cocos2d/kazmath/mat4SIMD.js

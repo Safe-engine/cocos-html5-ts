@@ -30,6 +30,9 @@
  * @name cc
  */
 declare namespace cc {
+  class CustomRenderCmd {
+    constructor(target: cc.Node & any, cb: any)
+  }
   export let _renderType: number
   export let _isContextMenuEnable: boolean
   export let _renderContext: any
@@ -37,7 +40,6 @@ declare namespace cc {
   export let renderer: any
   export let shaderCache: any
   export let current_stack: any
-  export const RENDER_TYPE_WEBGL: number
   export const BATCH_VERTEX_COUNT: number
   export const SHADER_SPRITE_POSITION_TEXTURECOLOR: number
   export const OPTIMIZE_BLEND_FUNC_FOR_PREMULTIPLIED_ALPHA: number
