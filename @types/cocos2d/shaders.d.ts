@@ -20,6 +20,9 @@ declare namespace cc {
     _updateProjectionUniform(): void
     use(): void
     setUniformsForBuiltins(): void
+    setUniformLocationWith1i(location: WebGLUniformLocation | string, i: number)
+    setUniformLocationWith2f(location: WebGLUniformLocation | string, f1: number, f2: number)
+    setUniformLocationWith1f(location: WebGLUniformLocation | string, f: number)
   }
   class GLProgramState {
     // Properties

@@ -602,6 +602,9 @@ declare namespace cc {
 
     export class Texture2D extends Class {
         _webTextureObj: any;
+        _textureLoaded: boolean
+        width: number
+        height: number
         public url: string;
         public isLoaded(): boolean;
         public getPixelsWide(): number;
@@ -609,7 +612,7 @@ declare namespace cc {
         public initWithElement(image: Image): void;
         public handleLoadedTexture(): void;
         public getContentSize(): Size
-        addLoadedEventListener(callback, target): void;
+        addLoadedEventListener(callback, target?): void;
     }
 
     ////////////////////////////////////////////////////////////////////////////////

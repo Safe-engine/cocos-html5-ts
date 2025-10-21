@@ -1,0 +1,72 @@
+window.onload = function () {
+  cc.game.onStart = function () {
+    cc.view.setDesignResolutionSize(800, 600, cc.ResolutionPolicy.SHOW_ALL);
+
+    let scene = new cc.Scene();
+    let layer = new cc.Layer();
+    scene.addChild(layer);
+
+    cc.loader.load([
+      "res/frame.png",
+      "shaders/tiled.vsh",
+      "shaders/tiled.fsh",
+    ], function () {
+      let sprite = new cc.Sprite("res/frame.png");
+      let texture = sprite.getTexture();
+      console.log('texture', texture.getContentSize())
+      if (!texture || texture.getContentSize().width === 0) {
+        console.error("Texture chưa sẵn sàng, không thể set shader.");
+        return;
+      }
+      sprite.setPosition(cc.winSize.width / 2, cc.winSize.height / 2);
+      //   sprite.setScale(2);
+      layer.addChild(sprite);
+
+      let vert = cc.loader.getRes("shaders/tiled.vsh");
+      let frag = cc.loader.getRes("shaders/tiled.fsh");
+      // console.log('vertShader', vert)
+      // console.log('fragShader', frag)
+      let program = new cc.GLProgram();
+      program.initWithString(vert, frag);
+      // program.initWithVertexShaderByteArray(vert, frag);
+      program.addAttribute(cc.ATTRIBUTE_NAME_POSITION, cc.VERTEX_ATTRIB_POSITION);
+      program.addAttribute(cc.ATTRIBUTE_NAME_COLOR, cc.VERTEX_ATTRIB_COLOR);
+      program.addAttribute(cc.ATTRIBUTE_NAME_TEX_COORD, cc.VERTEX_ATTRIB_TEX_COORDS);
+      if (!program.link()) {
+        console.error("Failed to link shader program");
+        return;
+      }
+      program.updateUniforms();
+      // program.setUniformLocationWith1i(program.getUniformLocationForName("u_texture"), 0);
+
+      // set default uniforms (thay sau khi sprite đã có texture)
+      var tileScaleLoc = program.getUniformLocationForName("u_tileScale");
+      var texSizeLoc = program.getUniformLocationForName("u_texSize");
+      var alphaLoc = program.getUniformLocationForName("u_alpha");
+      sprite.texture._textureLoaded ? afterLoaded() : sprite.texture.addLoadedEventListener(afterLoaded);
+
+      function afterLoaded() {
+        // texture size (pixels)
+        var w = sprite.getTexture().width;
+        var h = sprite.getTexture().height;
+
+        // tell GL program about these sizes
+        program.use();
+        program.setUniformLocationWith2f(texSizeLoc, w, h);
+
+        // set tile counts (ví dụ muốn 4 repeats ngang, 3 dọc)
+        program.setUniformLocationWith2f(tileScaleLoc, 4.2, 3.5);
+
+        // alpha
+        program.setUniformLocationWith1f(alphaLoc, 1.0);
+
+        // gán shader cho sprite
+        sprite.setShaderProgram(program);
+        // nếu dùng batch node hoặc spriteframe atlas, đảm bảo texture unit đúng
+      }
+    });
+
+    cc.director.runScene(scene);
+  };
+  cc.game.run();
+};
