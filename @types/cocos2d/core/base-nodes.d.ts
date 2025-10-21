@@ -105,6 +105,7 @@ declare module cc {
     public static _dirtyFlags: any;
     public static CanvasRenderCmd: any;
     public static WebGLRenderCmd: any;
+    setShaderProgram(program: GLProgram)
 
     _renderCmd: any
     _visible: boolean;

@@ -446,7 +446,6 @@ declare namespace cc {
    * @property {cc.V3F_C4B_T2F_Quad}  quad                - <@readonly> The quad (tex coords, vertex coords and color) information.
    */
   export class Sprite extends Node {
-    setShaderProgram(program: GLProgram)
     static create(fileName?: string | SpriteFrame | Texture2D, rect?: Rect, rotated?: boolean): Sprite;
     public dirty: boolean;
     public flippedX: boolean;

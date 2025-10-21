@@ -601,6 +601,7 @@ declare namespace cc {
     //});
 
     export class Texture2D extends Class {
+        static PIXEL_FORMAT_RGBA8888: number
         _webTextureObj: any;
         _textureLoaded: boolean
         width: number
@@ -613,6 +614,7 @@ declare namespace cc {
         public handleLoadedTexture(): void;
         public getContentSize(): Size
         addLoadedEventListener(callback, target?): void;
+        initWithData(data:Uint8Array, pixelFormat :number, pixelsWide :number, pixelsHigh :number, contentSize: cc.Size) :bool
     }
 
     ////////////////////////////////////////////////////////////////////////////////

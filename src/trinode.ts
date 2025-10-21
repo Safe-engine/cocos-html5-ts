@@ -4,7 +4,18 @@ window.onload = function () {
     let scene = new cc.Scene();
     cc.director.runScene(scene);
     // Tạo sprite với shader tùy chỉnh
-    var triangleSprite = new cc.Sprite("res/zebra.png");
+    const width = 300
+    const height = 200
+    const texture = new cc.Texture2D();
+    const data = new Uint8Array(new Array(width * height * 4).fill(255));
+    texture.initWithData(
+      data,
+      cc.Texture2D.PIXEL_FORMAT_RGBA8888,
+      width, height,
+      cc.size(width, height)
+    );
+    // Tạo sprite từ texture
+    const triangleSprite = new cc.Sprite(texture);
     triangleSprite.setPosition(200, 150);
     // triangleSprite.setContentSize(300, 300);
 
