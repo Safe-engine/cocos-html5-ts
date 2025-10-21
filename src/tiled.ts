@@ -38,28 +38,27 @@ window.onload = function () {
       }
       program.updateUniforms();
       // program.setUniformLocationWith1i(program.getUniformLocationForName("u_texture"), 0);
-
       // set default uniforms (thay sau khi sprite đã có texture)
-      var tileScaleLoc = program.getUniformLocationForName("u_tileScale");
-      var texSizeLoc = program.getUniformLocationForName("u_texSize");
-      var alphaLoc = program.getUniformLocationForName("u_alpha");
+      const tileScaleLoc = program.getUniformLocationForName("u_tileScale");
+      const texSizeLoc = program.getUniformLocationForName("u_texSize");
+      const alphaLoc = program.getUniformLocationForName("u_alpha");
+      sprite.setContentSize(512, 256);
       sprite.texture._textureLoaded ? afterLoaded() : sprite.texture.addLoadedEventListener(afterLoaded);
 
       function afterLoaded() {
         // texture size (pixels)
-        var w = sprite.getTexture().width;
-        var h = sprite.getTexture().height;
-
+        const texW = sprite.texture.width;
+        const texH = sprite.texture.height;
+        const size = sprite.getContentSize();
+        const scaleX = size.width / texW;
+        const scaleY = size.height / texH;
         // tell GL program about these sizes
-        program.use();
-        program.setUniformLocationWith2f(texSizeLoc, w, h);
-
+        // program.use();
+        program.setUniformLocationWith2f(texSizeLoc, texW, texH);
         // set tile counts (ví dụ muốn 4 repeats ngang, 3 dọc)
-        program.setUniformLocationWith2f(tileScaleLoc, 4.2, 3.5);
-
+        program.setUniformLocationWith2f(tileScaleLoc, scaleX, scaleY);
         // alpha
         program.setUniformLocationWith1f(alphaLoc, 1.0);
-
         // gán shader cho sprite
         sprite.setShaderProgram(program);
         // nếu dùng batch node hoặc spriteframe atlas, đảm bảo texture unit đúng
