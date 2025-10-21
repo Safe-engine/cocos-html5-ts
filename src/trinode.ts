@@ -3,121 +3,87 @@ window.onload = function () {
     cc.view.setDesignResolutionSize(800, 600, cc.ResolutionPolicy.SHOW_ALL);
     let scene = new cc.Scene();
     cc.director.runScene(scene);
-    // TriNode.js
-    const VERT_SRC = `
-attribute vec4 a_position;
-uniform mat4 u_MVPMatrix;
-void main() {
-  gl_Position = u_MVPMatrix * a_position;
-}
-`;
+    // Tạo sprite với shader tùy chỉnh
+    var triangleSprite = new cc.Sprite("res/zebra.png");
+    triangleSprite.setPosition(200, 150);
+    // triangleSprite.setContentSize(300, 300);
 
-    const FRAG_SRC = `
-#ifdef GL_ES
-precision mediump float;
-#endif
-uniform vec4 u_color;
-void main() {
-  gl_FragColor = u_color;
-}
-`;
+    // Vertex shader
+    var vertShader = `
+                        attribute vec4 a_position;
+                        attribute vec2 a_texCoord;
+                        varying vec2 v_texCoord;
 
-    class TriNode extends cc.Node {
-      private gl: WebGLRenderingContext;
-      private program: cc.GLProgram;
-      private glProgram: WebGLProgram;
-      private vbo: WebGLBuffer;
-      private colorFloat32: [number, number, number, number];
+                        void main() {
+                            gl_Position = CC_PMatrix * a_position;
+                            v_texCoord = a_texCoord;
+                        }
+                    `;
 
-      constructor(
-        public triWidth = 100,
-        public triHeight = 100,
-        color: [number, number, number, number] = [1, 0.5, 0.2, 1]
-      ) {
-        super();
-        super.ctor();
-        this.gl = cc._renderContext as WebGLRenderingContext;
-        this.colorFloat32 = color;
+    // Fragment shader - vẽ tam giác
+    var fragShader = `
+                        #ifdef GL_ES
+                        precision mediump float;
+                        #endif
 
-        // Tạo GLProgram (wrapper)
-        const program = new cc.GLProgram();
-        program.initWithString(VERT_SRC, FRAG_SRC);
-        program.addAttribute(cc.ATTRIBUTE_NAME_POSITION, cc.VERTEX_ATTRIB_POSITION);
-        program.addAttribute(cc.ATTRIBUTE_NAME_COLOR, cc.VERTEX_ATTRIB_COLOR);
-        program.addAttribute(cc.ATTRIBUTE_NAME_TEX_COORD, cc.VERTEX_ATTRIB_TEX_COORDS);
-        if (!program.link()) {
-          console.error("Failed to link shader program");
-          return;
-        }
-        program.updateUniforms();
-        this.program = program;
+                        varying vec2 v_texCoord;
+                        uniform float u_time;
 
-        // Lấy WebGLProgram thực
-        this.glProgram = program.getProgram();
+                        void main() {
+                            vec2 uv = v_texCoord;
 
-        // Vertex buffer (tam giác)
-        const w = triWidth, h = triHeight;
-        const vertices = new Float32Array([
-          0, h / 2, 0,
-          -w / 2, -h / 2, 0,
-          w / 2, -h / 2, 0,
-        ]);
-        const vbo = this.gl.createBuffer()!;
-        this.gl.bindBuffer(this.gl.ARRAY_BUFFER, vbo);
-        this.gl.bufferData(this.gl.ARRAY_BUFFER, vertices, this.gl.STATIC_DRAW);
-        this.gl.bindBuffer(this.gl.ARRAY_BUFFER, null);
-        this.vbo = vbo;
-      }
+                            // Định nghĩa 3 đỉnh tam giác
+                            vec2 v1 = vec2(0.5, 0.8);  // Đỉnh trên
+                            vec2 v2 = vec2(0.2, 0.2);  // Đỉnh trái dưới
+                            vec2 v3 = vec2(0.8, 0.2);  // Đỉnh phải dưới
 
-      visit(parentCmd?: any) {
-        super.visit(parentCmd);
-        this.renderTriangle();
-      }
+                            // Tính toán barycentric coordinates
+                            float d1 = sign((uv.x - v2.x) * (v1.y - v2.y) - (v1.x - v2.x) * (uv.y - v2.y));
+                            float d2 = sign((uv.x - v3.x) * (v2.y - v3.y) - (v2.x - v3.x) * (uv.y - v3.y));
+                            float d3 = sign((uv.x - v1.x) * (v3.y - v1.y) - (v3.x - v1.x) * (uv.y - v1.y));
 
-      private renderTriangle() {
-        const gl = this.gl;
-        const program = this.program;
-        program.use();
-        program.setUniformsForBuiltins();
+                            // Kiểm tra nếu điểm nằm trong tam giác
+                            bool inside = (d1 >= 0.0) && (d2 >= 0.0) && (d3 >= 0.0);
 
-        const glProg = this.glProgram;
+                            if (inside) {
+                                // Màu gradient dựa trên vị trí và thời gian
+                                vec3 color1 = vec3(1.0, 0.3, 0.5);
+                                vec3 color2 = vec3(0.3, 0.8, 1.0);
+                                vec3 color = mix(color1, color2, uv.y + sin(u_time) * 0.2);
 
-        // uniform locations
-        const uMVP = gl.getUniformLocation(glProg, "u_MVPMatrix");
-        const uColor = gl.getUniformLocation(glProg, "u_color");
+                                gl_FragColor = vec4(color, 1.0);
+                            } else {
+                                discard; // Bỏ qua pixel ngoài tam giác
+                            }
+                        }
+                    `;
 
-        // attribute location
-        const aPos = gl.getAttribLocation(glProg, "a_position");
+    // Tạo shader program
+    var program = new cc.GLProgram();
+    program.initWithString(vertShader, fragShader);
+    program.addAttribute(cc.ATTRIBUTE_NAME_POSITION, cc.VERTEX_ATTRIB_POSITION);
+    program.addAttribute(cc.ATTRIBUTE_NAME_COLOR, cc.VERTEX_ATTRIB_COLOR);
+    program.addAttribute(cc.ATTRIBUTE_NAME_TEX_COORD, cc.VERTEX_ATTRIB_TEX_COORDS);
+    program.link();
+    program.updateUniforms();
 
-        // node's world matrix
-        console.log(this._renderCmd)
-        var affine = (this as any)._renderCmd._worldTransform
-        const mat4 = new cc.math.Matrix4();
-        mat4.mat = new Float32Array([
-          affine.a, affine.b, 0, 0,
-          affine.c, affine.d, 0, 0,
-          0, 0, 1, 0,
-          affine.tx, affine.ty, 0, 1
-        ]);
-        gl.uniformMatrix4fv(uMVP, false, mat4.mat);
-        gl.uniform4fv(uColor, new Float32Array(this.colorFloat32));
+    // Lưu location của uniform
+    var timeLocation = program.getUniformLocationForName("u_time");
+    var time = 0;
 
-        gl.bindBuffer(gl.ARRAY_BUFFER, this.vbo);
-        gl.enableVertexAttribArray(aPos);
-        gl.vertexAttribPointer(aPos, 3, gl.FLOAT, false, 0, 0);
+    // Áp dụng shader
+    triangleSprite.setShaderProgram(program);
 
-        gl.drawArrays(gl.TRIANGLES, 0, 3);
+    // Update thời gian để tạo hiệu ứng động
+    triangleSprite.scheduleUpdate();
+    triangleSprite.update = function (dt) {
+      // console.log('update')
+      time += dt;
+      program.use();
+      program.setUniformLocationWith1f(timeLocation, time);
+    };
 
-        gl.disableVertexAttribArray(aPos);
-        gl.bindBuffer(gl.ARRAY_BUFFER, null);
-        cc.g_NumberOfDraws++;
-      }
-    }
-    // trong scene hoặc layer của bạn
-    const tri = new TriNode(160, 120, [0.2, 0.7, 1.0, 1.0]); // width, height, rgba
-    tri.setPosition(200, 150);
-    // tri.setAnchorPoint(0.5, 0.5);
-    scene.addChild(tri);
+    scene.addChild(triangleSprite);
   };
   cc.game.run();
 };

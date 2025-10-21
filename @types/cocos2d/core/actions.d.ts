@@ -3690,7 +3690,7 @@ declare namespace cc {
      * // example
      * var actionBy = cc.rotateBy(2, 360);
      */
-    export function rotateBy(duration:number, deltaAngleX:number, deltaAngleY:number):RotateBy;
+    export function rotateBy(duration:number, deltaAngleX:number|Vec2, deltaAngleY?:number):RotateBy;
 
     /**
      * <p>
