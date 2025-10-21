@@ -33,3 +33,4 @@
 /// <reference path="render-texture.d.ts" />
 /// <reference path="shape-nodes.d.ts" />
 /// <reference path="progress-timer.d.ts" />
+/// <reference path="shaders.d.ts" />

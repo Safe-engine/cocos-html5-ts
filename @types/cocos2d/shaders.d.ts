@@ -3,7 +3,7 @@
 declare namespace cc {
   class GLProgram {
     // Properties
-    _programObj
+    _programObj: WebGLProgram
     _vertShader: WebGLShader
     _fragShader: WebGLShader
     public constructor(vShaderFileName?: string, fShaderFileName?: string, glContext?: GLProgram);
@@ -20,9 +20,9 @@ declare namespace cc {
     _updateProjectionUniform(): void
     use(): void
     setUniformsForBuiltins(): void
-    setUniformLocationWith1i(location: WebGLUniformLocation | string, i: number)
-    setUniformLocationWith2f(location: WebGLUniformLocation | string, f1: number, f2: number)
-    setUniformLocationWith1f(location: WebGLUniformLocation | string, f: number)
+    setUniformLocationWith1i(location: WebGLUniformLocation | string, i: number): void
+    setUniformLocationWith2f(location: WebGLUniformLocation | string, f1: number, f2: number): void
+    setUniformLocationWith1f(location: WebGLUniformLocation | string, f: number): void
   }
   class GLProgramState {
     // Properties
