@@ -165,6 +165,38 @@ declare namespace ccui {
     setScale9Enabled(able: boolean);
   }
 
+  export class ScrollView extends Layout {
+    static DIR_NONE: number
+    static DIR_VERTICAL: number
+    static DIR_HORIZONTAL: number
+    static DIR_BOTH: number
+    setInnerContainerSize(size: Size): void
+    setDirection(dir: number): void
+    setBounceEnabled(bouced: boolean): void
+    scrollToBottom(time: number, attenuated: boolean): void
+    scrollToTop(time: number, attenuated: boolean): void
+    scrollToLeft(time: number, attenuated: boolean): void
+    scrollToRight(time: number, attenuated: boolean): void
+    scrollToTopLeft(time: number, attenuated: boolean): void
+    scrollToTopRight(time: number, attenuated: boolean): void
+    scrollToBottomLeft(time: number, attenuated: boolean): void
+    scrollToBottomRight(time: number, attenuated: boolean): void
+    scrollToPercentVertical(percent: number, time: number, attenuated: boolean): void
+    scrollToPercentHorizontal(percent: number, time: number, attenuated: boolean): void
+    scrollToPercentBothDirection(percent: cc.Point, time: number, attenuated: boolean): void
+    jumpToBottom(): void
+    jumpToTop(): void
+    jumpToLeft(): void
+    jumpToRight(): void
+    jumpToTopLeft(): void
+    jumpToTopRight(): void
+    jumpToBottomLeft(): void
+    jumpToBottomRight(): void
+    jumpToPercentVertical(percent: number): void
+    jumpToPercentHorizontal(percent: number): void
+    jumpToPercentBothDirection(percent: cc.Point): void
+  }
+
   export class LayoutComponent {
     public static horizontalEdge = { NONE: 0, LEFT: 1, RIGHT: 2, CENTER: 3 };
     public static verticalEdge = { NONE: 0, BOTTOM: 1, TOP: 2, CENTER: 3 };
