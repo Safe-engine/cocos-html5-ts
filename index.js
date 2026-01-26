@@ -41,7 +41,12 @@ console.log(jsList.length)
 const closureCompiler = new ClosureCompiler({
   js: [
     engineDir + "/CCBoot.js",
-    ...jsList
+    ...jsList,
+    "extensions/gui/scrollview/CCScrollView.js",
+    "extensions/gui/scrollview/CCScrollViewCanvasRenderCmd.js",
+    "extensions/gui/scrollview/CCScrollViewWebGLRenderCmd.js",
+    "extensions/gui/scrollview/CCSorting.js",
+    "extensions/gui/scrollview/CCTableView.js"
   ],
   js_output_file: 'lib/cocos2d-3.17.js',
   compilation_level: 'WHITESPACE_ONLY',

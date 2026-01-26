@@ -4850,4 +4850,5 @@ declare namespace cc {
      * @return {cc.ActionTween}
      */
     export function actionTween(duration:number, key:string, from:number, to:number):ActionTween;
+    export function progressTo(duration:number, to:number): ActionInterval;
 }
