@@ -42,11 +42,13 @@ const closureCompiler = new ClosureCompiler({
   js: [
     engineDir + "/CCBoot.js",
     ...jsList,
-    "extensions/gui/scrollview/CCScrollView.js",
-    "extensions/gui/scrollview/CCScrollViewCanvasRenderCmd.js",
-    "extensions/gui/scrollview/CCScrollViewWebGLRenderCmd.js",
-    "extensions/gui/scrollview/CCSorting.js",
-    "extensions/gui/scrollview/CCTableView.js"
+    ...[
+      "extensions/gui/scrollview/CCScrollView.js",
+      "extensions/gui/scrollview/CCScrollViewCanvasRenderCmd.js",
+      "extensions/gui/scrollview/CCScrollViewWebGLRenderCmd.js",
+      "extensions/gui/scrollview/CCSorting.js",
+      "extensions/gui/scrollview/CCTableView.js"
+    ].map(f => engineDir + '/' + f),
   ],
   js_output_file: 'lib/cocos2d-3.17.js',
   compilation_level: 'WHITESPACE_ONLY',
