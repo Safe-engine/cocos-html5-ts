@@ -111,6 +111,9 @@ declare namespace ccui {
     setZoomScale(scale: number);
     titleText: string;
     titleFontSize: number;
+    isScale9Enabled(): boolean;
+    setCapInsets(capInsets: cc.Rect);
+    setScale9Enabled(able: boolean);
   }
 
   export class Text extends Widget {
