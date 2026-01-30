@@ -71,6 +71,8 @@ declare namespace ccui {
     public static TOUCH_CANCELED = 3;
     public static LOCAL_TEXTURE = 0;
     public static PLIST_TEXTURE = 1;
+    static TextureType = typeof Widget.LOCAL_TEXTURE | typeof Widget.PLIST_TEXTURE;
+    static TouchEventType = typeof Widget.TOUCH_BEGAN | typeof Widget.TOUCH_MOVED
     node: Node;
     touchEnabled: boolean;
     getTouchEndPosition(): cc.Point;
@@ -87,6 +89,10 @@ declare namespace ccui {
     setBright(bright: boolean): void;
     setHighlighted(highlight: boolean): void;
     setEnabled(enabled: boolean): void;
+    setContentSize(contentSize: cc.Size, height?: number);
+    isScale9Enabled(): boolean;
+    setScale9Enabled(able: boolean);
+    setCapInsets(capInsets: cc.Rect);
   }
 
   export class Layout extends Widget {
@@ -111,9 +117,6 @@ declare namespace ccui {
     setZoomScale(scale: number);
     titleText: string;
     titleFontSize: number;
-    isScale9Enabled(): boolean;
-    setCapInsets(capInsets: cc.Rect);
-    setScale9Enabled(able: boolean);
   }
 
   export class Text extends Widget {
@@ -161,11 +164,7 @@ declare namespace ccui {
   export class ImageView extends Widget {
     constructor(imageFileName: string, texType?: TextureType);
     string: string;
-    isScale9Enabled(): boolean;
     loadTexture(fileName: string, texType?: TextureType);
-    setCapInsets(capInsets: cc.Rect);
-    setContentSize(contentSize: cc.Size, height?: number);
-    setScale9Enabled(able: boolean);
   }
 
   export class ScrollView extends Layout {
@@ -247,10 +246,6 @@ declare namespace ccui {
     seekWidgetByName(root: cc.Node, name: string): ccui.Widget;
   }
 
-  declare namespace Widget {
-    export type TextureType = typeof Widget.LOCAL_TEXTURE | typeof Widget.PLIST_TEXTURE;
-    export type TouchEventType = typeof Widget.TOUCH_BEGAN | typeof Widget.TOUCH_MOVED
-  }
   var helper: WidgetHelper;
 
 }
