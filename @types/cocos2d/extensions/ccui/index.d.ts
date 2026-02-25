@@ -241,6 +241,13 @@ declare namespace ccui {
     loadTexture(texture: string, texType?: TextureType);
   }
 
+  export class Slider extends Widget {
+    constructor(barTextureName: string, normalBallTextureName: string, resType?: TextureType);
+    setPercent(percent: number): void;
+    getPercent(): number;
+    addEventListener(selector: (sender: Slider, type: number) => void, target: cc.Node): void;
+  }
+
   interface WidgetHelper {
     doLayout<T extends cc.Node>(layout: Layout | T): void;
     seekWidgetByName(root: cc.Node, name: string): ccui.Widget;
