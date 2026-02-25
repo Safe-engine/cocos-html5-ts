@@ -246,7 +246,7 @@ declare namespace ccui {
     constructor(barTextureName: string, normalBallTextureName: string, resType?: TextureType);
     setPercent(percent: number): void;
     getPercent(): number;
-    addEventListener(selector: (sender: Slider, type: number) => void, target: cc.Node): void;
+    addEventListener(selector: (sender: Slider, type: number) => void, target: any): void;
   }
 
   interface WidgetHelper {
