@@ -242,6 +242,7 @@ declare namespace ccui {
   }
 
   export class Slider extends Widget {
+    static EVENT_PERCENT_CHANGED: number
     constructor(barTextureName: string, normalBallTextureName: string, resType?: TextureType);
     setPercent(percent: number): void;
     getPercent(): number;
