@@ -244,6 +244,9 @@ declare namespace ccui {
   export class Slider extends Widget {
     static EVENT_PERCENT_CHANGED: number
     constructor(barTextureName: string, normalBallTextureName: string, resType?: TextureType);
+    loadSlidBallTexturePressed(pressedTexture: string, texType?: TextureType): void;
+    loadSlidBallTextureNormal(normalTexture: string, texType?: TextureType): void;
+    loadSlidBallTextureDisabled(disabledTexture: string, texType?: TextureType): void;
     setPercent(percent: number): void;
     getPercent(): number;
     addEventListener(selector: (sender: Slider, type: number) => void, target: any): void;

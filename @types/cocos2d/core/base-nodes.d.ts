@@ -1594,9 +1594,9 @@ declare module cc {
     /**
      * Recursive method that visit its children and draw them
      * @function
-     * @param {cc.Node.RenderCmd} parentCmd
+     * @param {cc.Node} parent
      */
-    public visit(parentCmd: Node.RenderCmd): void;
+    public visit(parent?: Node): void;
 
     /**
      * @function
