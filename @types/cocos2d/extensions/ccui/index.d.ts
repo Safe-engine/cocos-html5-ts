@@ -172,6 +172,7 @@ declare namespace ccui {
     static DIR_VERTICAL: number
     static DIR_HORIZONTAL: number
     static DIR_BOTH: number
+    static EVENT_CONTAINER_MOVED: number
     setInnerContainerSize(size: Size): void
     setDirection(dir: number): void
     setBounceEnabled(bouced: boolean): void
@@ -197,6 +198,9 @@ declare namespace ccui {
     jumpToPercentVertical(percent: number): void
     jumpToPercentHorizontal(percent: number): void
     jumpToPercentBothDirection(percent: cc.Point): void
+    addEventListener(listener: (sender: ScrollView, type: number) => void): void
+    setInnerContainerPosition(pos: cc.Point): void
+    getInnerContainerPosition(): cc.Point;
   }
 
   export class LayoutComponent {
